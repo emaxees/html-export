@@ -1,6 +1,5 @@
 import { Injectable, OnModuleInit } from "@nestjs/common";
 import { launch, Page } from "puppeteer";
-import * as os from "os";
 
 @Injectable()
 export class PuppeteerService implements OnModuleInit {
@@ -15,7 +14,15 @@ export class PuppeteerService implements OnModuleInit {
 
     const browser = await launch({
       headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-accelerated-2d-canvas",
+        "--no-first-run",
+        "--no-zygote",
+        "--disable-gpu"
+      ],
     });
 
     this.page = await browser.newPage();
