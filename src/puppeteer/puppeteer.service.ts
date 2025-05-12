@@ -1,7 +1,7 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
-import { launch, Page, Browser } from 'puppeteer-core';
-import chrome from 'chrome-aws-lambda';
-import * as os from 'os';
+import { Injectable, OnModuleInit } from "@nestjs/common";
+import { launch, Page, Browser } from "puppeteer-core";
+import chrome from "chrome-aws-lambda";
+import * as os from "os";
 
 @Injectable()
 export class PuppeteerService implements OnModuleInit {
@@ -15,49 +15,49 @@ export class PuppeteerService implements OnModuleInit {
     if (this.page) return this.page;
 
     let browser: Browser;
-    
+
     // Verificar si estamos en entorno de desarrollo o producción
-    const isDev = process.env.NODE_ENV !== 'production';
-    
+    const isDev = process.env.NODE_ENV !== "production";
+
     if (isDev) {
       // Configuración para entorno de desarrollo local
       const executablePath = this.getChromePath();
       browser = await launch({
         headless: true,
         args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-accelerated-2d-canvas',
-          '--no-first-run',
-          '--no-zygote',
-          '--disable-gpu'
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-dev-shm-usage",
+          "--disable-accelerated-2d-canvas",
+          "--no-first-run",
+          "--no-zygote",
+          "--disable-gpu",
         ],
         executablePath,
       });
     } else {
       // Configuración para entorno de producción (AWS Lambda)
       browser = await launch({
-        args: chrome.args,
-        executablePath: await chrome.executablePath,
-        headless: chrome.headless,
+        args: chrome?.args,
+        executablePath: await chrome?.executablePath,
+        headless: chrome?.headless,
       });
     }
-    
+
     this.page = await browser.newPage();
     return this.page;
   }
-  
+
   private getChromePath(): string {
     // Detectar la ruta de Chrome según el sistema operativo
     const platform = os.platform();
-    
-    if (platform === 'darwin') { // macOS
-      return '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-    } else if (platform === 'win32') { // Windows
-      return 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-    } else { // Linux
-      return '/usr/bin/google-chrome';
+
+    if (platform === "darwin") {
+      return "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+    } else if (platform === "win32") {
+      return "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+    } else {
+      return "/usr/bin/google-chrome";
     }
   }
 
@@ -69,7 +69,11 @@ export class PuppeteerService implements OnModuleInit {
     return content;
   }
 
-  async getScreenshot(url: string, width?: number, height?: number): Promise<Buffer> {
+  async getScreenshot(
+    url: string,
+    width?: number,
+    height?: number,
+  ): Promise<Buffer> {
     const page = await this.getPage();
     await page.goto(url);
     await page.setViewport({
