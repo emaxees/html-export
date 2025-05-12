@@ -1,1 +1,96 @@
+# Dependencias
+/node_modules
+/.pnp
+.pnp.js
+
+# Compilados y distribución
+/dist
+/build
+/out
+/.next
+/.nuxt
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Tests y cobertura
+/coverage
+/.nyc_output
+/jest-coverage
+/.jest-cache
+
+# Entorno y variables
+.env
+.env.*
+!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Sistemas operativos
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDEs y editores
+/.idea
+/.vscode/*
+!/.vscode/settings.json
+!/.vscode/tasks.json
+!/.vscode/launch.json
+!/.vscode/extensions.json
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Archivos temporales
+tmp/
+temp/
+.tmp/
+
+# Caché
+.cache/
+.npm
+.eslintcache
+.stylelintcache
+.parcel-cache
+
+# Archivos de bloqueo de dependencias (opcional)
+# yarn.lock
+# package-lock.json
+# pnpm-lock.yaml
+
+# Plataformas de despliegue
 .vercel
+.netlify
+.firebase/
+.github/
+
+# TypeScript
+tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# Otros
+.DS_Store
+.directory
+*.tgz
+*.zip
+*.tar.gz
+.history/
