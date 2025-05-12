@@ -12,18 +12,7 @@ export class PuppeteerService implements OnModuleInit {
   async getPage(): Promise<Page> {
     if (this.page) return this.page;
 
-    const browser = await launch({
-      headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-accelerated-2d-canvas",
-        "--no-first-run",
-        "--no-zygote",
-        "--disable-gpu"
-      ],
-    });
+    const browser = await launch();
 
     this.page = await browser.newPage();
     return this.page;
