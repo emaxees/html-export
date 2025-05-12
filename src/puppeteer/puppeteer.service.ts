@@ -1,6 +1,5 @@
 import { Injectable, OnModuleInit } from "@nestjs/common";
-import { launch, Page, Browser } from "puppeteer-core";
-import chrome from "chrome-aws-lambda";
+import { launch, Page } from "puppeteer-core";
 import * as os from "os";
 
 @Injectable()
@@ -14,45 +13,10 @@ export class PuppeteerService implements OnModuleInit {
   async getPage(): Promise<Page> {
     if (this.page) return this.page;
 
-    let browser: Browser;
-
-    // Verificar si estamos en entorno de desarrollo o producción
-    const isDev = process.env.NODE_ENV !== "production";
-
-    if (isDev) {
-      // Configuración para entorno de desarrollo local
-      const executablePath = this.getChromePath();
-      browser = await launch({
-        headless: true,
-        args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage",
-          "--disable-accelerated-2d-canvas",
-          "--no-first-run",
-          "--no-zygote",
-          "--disable-gpu",
-        ],
-        executablePath,
-      });
-    } else {
-      // Configuración para entorno de producción (AWS Lambda)
-      const executablePath =
-        (await chrome?.executablePath) || "/usr/bin/google-chrome";
-      browser = await launch({
-        args: chrome?.args || [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage",
-          "--disable-accelerated-2d-canvas",
-          "--no-first-run",
-          "--no-zygote",
-          "--disable-gpu",
-        ],
-        executablePath,
-        headless: chrome?.headless !== false,
-      });
-    }
+    const browser = await launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
 
     this.page = await browser.newPage();
     return this.page;
