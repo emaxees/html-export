@@ -1,5 +1,5 @@
 import { Injectable, OnModuleInit } from "@nestjs/common";
-import { launch, Page } from "puppeteer-core";
+import { launch, Page } from "puppeteer";
 import * as os from "os";
 
 @Injectable()
@@ -20,19 +20,6 @@ export class PuppeteerService implements OnModuleInit {
 
     this.page = await browser.newPage();
     return this.page;
-  }
-
-  private getChromePath(): string {
-    // Detectar la ruta de Chrome según el sistema operativo
-    const platform = os.platform();
-
-    if (platform === "darwin") {
-      return "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-    } else if (platform === "win32") {
-      return "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-    } else {
-      return "/usr/bin/google-chrome";
-    }
   }
 
   async getContent(url: string): Promise<string> {

@@ -7,71 +7,71 @@
   Este proyecto es una versión actualizada y mejorada del proyecto original "Getwebsource".
 </p>
 
-## Descripción
+## Description
 
-Esta aplicación proporciona una API RESTful para obtener el contenido HTML y capturas de pantalla de sitios web utilizando Puppeteer y NestJS.
+This application provides a RESTful API to get HTML content and screenshots from websites using Puppeteer and NestJS.
 
-## Características
+## Features
 
-- Arquitectura modular basada en NestJS
-- Captura de contenido HTML de sitios web
-- Captura de screenshots de sitios web
-- Configuración lista para despliegue en Render.com
-- Soporte para CORS
+- Modular architecture based on NestJS
+- HTML content capture from websites
+- Website screenshots capture
+- Ready configuration for deployment on Render.com
+- CORS support
 
-## Instalación
+## Installation
 
 ```bash
-# Instalar dependencias
+# Install dependencies
 npm install
 ```
 
-## Ejecución
+## Execution
 
 ```bash
-# Modo desarrollo
+# Development mode
 npm run start:dev
 
-# Modo producción
+# Production mode
 npm run start:prod
 ```
 
-La aplicación estará disponible en `http://localhost:3000`
+The application will be available at `http://localhost:3000`
 
 ## Endpoints API
 
-### Obtener contenido HTML
+### Get HTML content
 
 ```
-GET /api/html?url=https://ejemplo.com
+GET /api/html?url=https://example.com
 ```
 
-Parámetros:
-- `url`: URL del sitio web del que se desea obtener el contenido HTML (obligatorio)
+Parameters:
+- `url`: Website URL from which to get HTML content (required)
 
-### Obtener screenshot
+### Get screenshot
 
 ```
-GET /api/screenshot?url=https://ejemplo.com&width=1280&height=720
+GET /api/screenshot?url=https://example.com&width=1280&height=720
 ```
 
-Parámetros:
-- `url`: URL del sitio web del que se desea obtener el screenshot (obligatorio)
-- `width`: Ancho del screenshot en píxeles (opcional, predeterminado: 1280)
-- `height`: Alto del screenshot en píxeles (opcional, predeterminado: 720)
+Parameters:
+- `url`: Website URL from which to get screenshot (required)
+- `width`: Screenshot width in pixels (optional, default: 1280)
+- `height`: Screenshot height in pixels (optional, default: 720)
 
-## Despliegue en Render.com
+## Deployment on Render.com
 
-Este proyecto incluye un archivo `render.yaml` que facilita el despliegue en Render.com:
+This project includes a `render.yaml` file that makes deployment to Render.com easier:
 
-1. Crea una cuenta en [Render.com](https://render.com) si aún no tienes una
-2. Conecta tu repositorio de GitHub/GitLab/Bitbucket
-3. Haz clic en "New Web Service"
-4. Selecciona tu repositorio
-5. Render detectará automáticamente la configuración del archivo `render.yaml`
-6. Haz clic en "Create Web Service"
+1. Create an account at [Render.com](https://render.com) if you don't have one
+2. Connect your GitHub/GitLab/Bitbucket repository
+3. Click on "New Web Service"
+4. Select your repository
+5. Render will automatically detect the configuration from the `render.yaml` file
+6. Click on "Create Web Service"
 
-## Pruebas
+## Testing
 
 ```bash
 # unit tests
