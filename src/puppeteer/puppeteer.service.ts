@@ -37,10 +37,20 @@ export class PuppeteerService implements OnModuleInit {
       });
     } else {
       // Configuración para entorno de producción (AWS Lambda)
+      const executablePath =
+        (await chrome?.executablePath) || "/usr/bin/google-chrome";
       browser = await launch({
-        args: chrome?.args,
-        executablePath: await chrome?.executablePath,
-        headless: chrome?.headless,
+        args: chrome?.args || [
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-dev-shm-usage",
+          "--disable-accelerated-2d-canvas",
+          "--no-first-run",
+          "--no-zygote",
+          "--disable-gpu",
+        ],
+        executablePath,
+        headless: chrome?.headless !== false,
       });
     }
 
